@@ -33,7 +33,7 @@ func NewRedisConn(host, port, password string) error {
 
 		//创建和配置链接
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", address)
+			c, err := redis.Dial("tcp", address, redis.DialDatabase(1), redis.DialConnectTimeout(20*time.Second))
 			if err != nil {
 				return nil, err
 			}
